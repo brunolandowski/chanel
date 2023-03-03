@@ -3,65 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>SocketIO Client</title>
-    <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-    <button onclick="onClick()">start</button>
-    <!-- File input and image output -->
-    <input type="file" id="input">
-    <img src="" id="output">
-
-    <!-- Client Code -->
-    <script type="text/javascript">
-
-      // Get WebSocket
-      var socket = io();
-
-      // Get DOM elements
-      var input = document.getElementById("input");
-      var output = document.getElementById("output");
-
-      // Join a channel
-      var room = "test";
-      socket.emit("join", room);
-
-      // Listen to file input events
-      document.getElementById("input").addEventListener("change", function (event) {
-
-        // Prepeare file reader
-        var file = event.target.files[0];
-        var fileReader = new FileReader();
-
-        fileReader.onloadend = function (event) {
-          // Send an image event to the socket
-          var image = event.target.result
-          output.src = image;
-          socket.emit("image", image);
-        };
-
-        // Read file
-        fileReader.readAsDataURL(file);
-      })
-
-      socket.on("image", function (image) {
-        output.src = image;
-      });
-
-            function onClick() {
-            // feature detect
-            if (typeof DeviceMotionEvent.requestPermission === 'function') {
-            DeviceMotionEvent.requestPermission()
-                .then(permissionState => {
-                if (permissionState === 'granted') {
-                    window.addEventListener('devicemotion', () => {});
-                }
-                })
-                .catch(console.error);
-            } else {
-            // handle regular non iOS 13+ devices
-            }
-        }
-      
-    </script>
+   
+   
+    <script type="text/javascript" src="index.js"></script>
   </body>
 </html>
